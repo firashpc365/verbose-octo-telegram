@@ -512,7 +512,7 @@ export const AppSettingsComponent: React.FC<AppSettingsComponentProps> = ({
                                     <p className="text-xs text-red-400">Handler not connected.</p>
                                 )}
                             </div>
-                             <div className="p-4 bg-blue-900/10 border border-blue-600/20 rounded-lg">
+                            <div className="p-4 bg-blue-900/10 border border-blue-600/20 rounded-lg">
                                 <h5 className="text-sm font-bold text-blue-400 mb-2">Raw Data Export</h5>
                                 <p className="text-xs text-blue-200/70 mb-3">
                                     Download the entire application state tree as a raw JSON file for debugging or manual migration.
@@ -531,6 +531,24 @@ export const AppSettingsComponent: React.FC<AppSettingsComponentProps> = ({
                                 >
                                     Download State Dump
                                 </button>
+                            </div>
+                            <div className="p-4 bg-slate-800/10 border border-white/10 rounded-lg flex flex-col gap-2">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <h5 className="text-sm font-bold text-white">Use AI Proxy</h5>
+                                        <p className="text-xs text-[var(--text-secondary-color)]">When enabled, AI calls are routed to the server-side proxy (`/api/ai/generate`).</p>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={() => onUpdateSettings({ aiProxyEnabled: !settings.aiProxyEnabled })}
+                                            className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-accent-color)] ${settings.aiProxyEnabled ? 'bg-[var(--primary-accent-color)]' : 'bg-slate-600'}`}
+                                            aria-pressed={!!settings.aiProxyEnabled}
+                                        >
+                                            <span className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform ${settings.aiProxyEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="text-xs text-[var(--text-secondary-color)]">Note: This toggle sets a runtime override; to persist across sessions, save settings.</div>
                             </div>
                         </div>
                     </div>

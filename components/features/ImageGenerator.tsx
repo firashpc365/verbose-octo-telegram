@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { Modal } from '../common/Modal';
 import { InlineSpinner } from '../common/LoadingSpinner';
-import { generateCustomImage } from '../../services/geminiService';
+import { generateCustomImage, QuotaExceededError } from '../../services/geminiService';
 import type { AIInteraction } from '../../types';
 import { SparkleIcon, DownloadIcon } from '../common/icons';
 
@@ -10,6 +10,7 @@ interface ImageGeneratorProps {
   onClose: () => void;
   setError: (error: any) => void;
   onLogAIInteraction: (interactionData: Omit<AIInteraction, 'interactionId' | 'timestamp'>) => void;
+  onAIFallback?: (isActive: boolean) => void;
 }
 
 type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4';
@@ -48,6 +49,9 @@ export const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onClose, setErro
       });
       setGeneratedImage(result);
     } catch (e: any) {
+      if (e instanceof QuotaExceededError) {
+        onAIFallback?.(true);
+      }
       setError(e);
     } finally {
       setIsLoading(false);

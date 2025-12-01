@@ -22,21 +22,21 @@ export type RFQStatus = 'New' | 'Quoted' | 'Closed - Won' | 'Closed - Lost';
 export type DataSource = 'manual' | 'ai' | 'mock_data';
 
 export interface SubItem {
-    subItemId: string;
-    name: string;
-    description?: string;
-    quantity: number;
-    unitPrice: number;
-    totalPrice?: number;
-    image?: string;
-    description_source?: DataSource;
+  subItemId: string;
+  name: string;
+  description?: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice?: number;
+  image?: string;
+  description_source?: DataSource;
 }
 
 export interface ServiceVariant {
-    id: string;
-    name: string;
-    price: number;
-    sku?: string;
+  id: string;
+  name: string;
+  price: number;
+  sku?: string;
 }
 
 export interface ServiceItem {
@@ -80,21 +80,21 @@ export interface CostTrackerItem {
 }
 
 export interface Task {
-    id: string;
-    description: string;
-    isCompleted: boolean;
-    dueDate?: string;
-    createdAt: string;
+  id: string;
+  description: string;
+  isCompleted: boolean;
+  dueDate?: string;
+  createdAt: string;
 }
 
 export interface ProposalContentData {
-    themeTitle?: string;
-    themeDescription?: string;
-    introduction?: string;
-    conclusion?: string;
-    coverTitle?: string;
-    coverSubtitle?: string;
-    themeImage?: string;
+  themeTitle?: string;
+  themeDescription?: string;
+  introduction?: string;
+  conclusion?: string;
+  coverTitle?: string;
+  coverSubtitle?: string;
+  themeImage?: string;
 }
 
 export interface EventItem {
@@ -122,9 +122,9 @@ export interface EventItem {
 }
 
 export interface CustomField {
-    id: string;
-    label: string;
-    value: string;
+  id: string;
+  label: string;
+  value: string;
 }
 
 export interface RFQItem {
@@ -181,67 +181,67 @@ export interface AIInteraction {
 }
 
 export interface QuotationDetails {
-    quotationId: string;
-    companyName: string;
-    companyAddress?: string;
-    contactPerson: string;
-    contactEmail: string;
-    website?: string;
-    linkedin?: string;
-    twitter?: string;
-    instagram?: string;
-    companyLogo?: string;
-    partnerLogo1?: string;
-    partnerLogo2?: string;
-    primaryColor: string;
-    validUntil: string;
-    termsAndConditions: string;
-    taxRate: number;
-    otherCharges: {
-        description: string;
-        amount: number;
-    };
+  quotationId: string;
+  companyName: string;
+  companyAddress?: string;
+  contactPerson: string;
+  contactEmail: string;
+  website?: string;
+  linkedin?: string;
+  twitter?: string;
+  instagram?: string;
+  companyLogo?: string;
+  partnerLogo1?: string;
+  partnerLogo2?: string;
+  primaryColor: string;
+  validUntil: string;
+  termsAndConditions: string;
+  taxRate: number;
+  otherCharges: {
+    description: string;
+    amount: number;
+  };
 }
 
 export interface QuotationTemplate {
-    templateId: string;
-    templateName: string;
-    details: Partial<QuotationDetails>;
-    lineItems: Partial<CostTrackerItem>[];
+  templateId: string;
+  templateName: string;
+  details: Partial<QuotationDetails>;
+  lineItems: Partial<CostTrackerItem>[];
 }
 
 export interface ProposalTemplateStyle {
-    primaryColor: string;
-    secondaryColor: string;
-    backgroundColor: string;
-    textColor: string;
-    fontFamilyHeading: string;
-    fontFamilyBody: string;
-    backgroundImageUrl?: string;
+  primaryColor: string;
+  secondaryColor: string;
+  backgroundColor: string;
+  textColor: string;
+  fontFamilyHeading: string;
+  fontFamilyBody: string;
+  backgroundImageUrl?: string;
 }
 
 export interface ProposalTemplate {
-    id: string;
-    name: string;
-    description: string;
-    templateType: 'system_default' | 'user_custom';
-    style: ProposalTemplateStyle;
-    structure?: string; // JSON string defining sections
-    imageGenerationPrompt?: string; // Specific style prompt for AI images
+  id: string;
+  name: string;
+  description: string;
+  templateType: 'system_default' | 'user_custom';
+  style: ProposalTemplateStyle;
+  structure?: string; // JSON string defining sections
+  imageGenerationPrompt?: string; // Specific style prompt for AI images
 }
 
 export interface ProposalLineItem extends CostTrackerItem {
-    key: string; // Unique key for UI list management
-    finalSalePrice?: number; // Optional override
-    subItems?: SubItem[];
-    generatedImage?: string; // Base64 or URL
-    description_source?: DataSource;
+  key: string; // Unique key for UI list management
+  finalSalePrice?: number; // Optional override
+  subItems?: SubItem[];
+  generatedImage?: string; // Base64 or URL
+  description_source?: DataSource;
 }
 
 export interface ProposalFinancials {
-    totalEstimatedCost: number;
-    totalEstimatedRevenue: number;
-    projectedMargin: number;
+  totalEstimatedCost: number;
+  totalEstimatedRevenue: number;
+  projectedMargin: number;
 }
 
 export interface SavedCatalogue {
@@ -264,12 +264,12 @@ export interface SavedCatalogue {
 // --- Supplier Management Module Interfaces ---
 
 export interface Supplier {
-    supplier_id: string;
-    name: string;
-    payment_terms: string;
-    performance_rating: number; // 1.0 to 5.0
-    contact_email: string;
-    category: string;
+  supplier_id: string;
+  name: string;
+  payment_terms: string;
+  performance_rating: number; // 1.0 to 5.0
+  contact_email: string;
+  category: string;
 }
 
 export type DocumentType = 'Quote' | 'Invoice' | 'Purchase Order' | 'Receipt';
@@ -277,134 +277,136 @@ export type GeminiStatus = 'Pending' | 'Processing' | 'Review Needed' | 'Verifie
 export type MatchStatus = 'FULL_MATCH' | 'MINOR_VARIANCE' | 'MAJOR_DISCREPANCY' | 'NO_PO_FOUND';
 
 export interface ProcurementDocumentAnalysis {
-    extraction_status: 'SUCCESS' | 'PARTIAL' | 'FAILED';
-    extracted_details: {
-        supplier_name: string;
-        document_number: string;
-        document_date: string;
-        total_amount: number;
-        currency: string;
-        line_items: { description: string; quantity: number; unit_price: number; total: number }[];
-    };
-    reconciliation_match: {
-        match_status: MatchStatus;
-        total_variance_amount: number;
-        variance_reason: string;
-        related_po_number?: string;
-    };
+  extraction_status: 'SUCCESS' | 'PARTIAL' | 'FAILED';
+  extracted_details: {
+    supplier_name: string;
+    document_number: string;
+    document_date: string;
+    total_amount: number;
+    currency: string;
+    line_items: { description: string; quantity: number; unit_price: number; total: number }[];
+  };
+  reconciliation_match: {
+    match_status: MatchStatus;
+    total_variance_amount: number;
+    variance_reason: string;
+    related_po_number?: string;
+  };
 }
 
 export interface ProcurementDocument {
-    document_id: string;
-    document_type: DocumentType;
-    document_number: string; // Extracted or Entered
-    file_url: string; // Base64 or URL
-    supplier_id?: string;
-    related_po_id?: string; // If invoice, link to PO
-    related_event_id?: string; // New: Link to Event
-    upload_date: string;
-    
-    // Gemini Results
-    gemini_results?: ProcurementDocumentAnalysis;
-    gemini_status: GeminiStatus;
-    
-    // Payment Tracking (Embedded for simplicity)
-    payment_status: 'Unpaid' | 'Scheduled' | 'Paid' | 'Cancelled';
-    due_date?: string;
-    payment_date?: string;
+  document_id: string;
+  document_type: DocumentType;
+  document_number: string; // Extracted or Entered
+  file_url: string; // Base64 or URL
+  supplier_id?: string;
+  related_po_id?: string; // If invoice, link to PO
+  related_event_id?: string; // New: Link to Event
+  upload_date: string;
+
+  // Gemini Results
+  gemini_results?: ProcurementDocumentAnalysis;
+  gemini_status: GeminiStatus;
+
+  // Payment Tracking (Embedded for simplicity)
+  payment_status: 'Unpaid' | 'Scheduled' | 'Paid' | 'Cancelled';
+  due_date?: string;
+  payment_date?: string;
 }
 
 export interface ThemePreset {
-    id: string;
-    name: string;
-    settings: Partial<AppSettings>;
-    createdAt: string;
+  id: string;
+  name: string;
+  settings: Partial<AppSettings>;
+  createdAt: string;
 }
 
 export interface Notification {
-    id: string;
-    title: string;
-    message: string;
-    timestamp: string;
-    read: boolean;
-    type: 'info' | 'success' | 'warning' | 'error';
-    link?: string; // e.g., "event:123"
+  id: string;
+  title: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+  type: 'info' | 'success' | 'warning' | 'error';
+  link?: string; // e.g., "event:123"
 }
 
 export interface RiskAnalysisResult {
-    riskLevel: 'Low' | 'Medium' | 'High';
-    riskFactors: string[];
-    suggestedStatus?: string;
+  riskLevel: 'Low' | 'Medium' | 'High';
+  riskFactors: string[];
+  suggestedStatus?: string;
 }
 
 export interface AppSettings {
-    themeMode: 'light' | 'dark';
-    adminPin?: string;
-    colors: {
-        primaryAccent: string;
-        background: string;
-        cardContainer: string;
-        primaryText: string;
-        secondaryText: string;
-        borderColor: string;
+  themeMode: 'light' | 'dark';
+  adminPin?: string;
+  colors: {
+    primaryAccent: string;
+    background: string;
+    cardContainer: string;
+    primaryText: string;
+    secondaryText: string;
+    borderColor: string;
+  };
+  typography: {
+    applicationFont: string;
+    headingFont: string;
+  };
+  layout: {
+    borderRadius: number;
+    sidebarWidth: number;
+    cardDensity: 'compact' | 'comfortable' | 'spacious';
+    glassIntensity?: number; // New: Control blur strength
+  };
+  motion: {
+    enableAnimations: boolean;
+    transitionSpeed: number; // seconds
+    animationDuration: number; // seconds
+    transitionEasing: string;
+    defaultEntryAnimation: 'fadeIn' | 'slideUp' | 'zoomIn';
+    smoothScrolling: boolean;
+    cardHoverEffect: 'lift' | 'scale' | 'glow' | 'none';
+    buttonHoverEffect: 'lift' | 'scale' | 'glow' | 'none';
+    // Particle System Config
+    particleCount?: number;
+    particleSpeed?: number;
+    particleOpacity?: number;
+    particleStyle?: 'particle-flow' | 'light-flares' | 'abstract-lines' | 'golden-sparkles';
+    particleDirection?: 'up' | 'down' | 'left' | 'right' | 'random';
+    particleShape?: 'circle' | 'square' | 'star';
+    motionSensitivity?: number;
+    responsiveSensitivity?: number;
+    enableOverlap?: boolean;
+    overlayMode?: boolean;
+  };
+  branding: {
+    logoUrl?: string;
+    appBackgroundUrl?: string; // New global background
+  };
+  landingPage?: {
+    background: {
+      type: 'image' | 'video' | 'gradient';
+      imagePool?: string[];
     };
-    typography: {
-        applicationFont: string;
-        headingFont: string;
+    motivationalQuotes: string[];
+  };
+  aiFallback?: {
+    enableGeminiQuotaFallback: boolean;
+    fallbackMode: 'predefined' | 'dynamic_placeholder';
+  };
+  // Whether to route AI calls to the server-side AI proxy at runtime
+  aiProxyEnabled?: boolean;
+  userPreferences?: {
+    defaultView: 'Home' | 'Dashboard' | 'Events';
+    dashboardWidgets?: string[]; // 'kpi', 'charts', 'alerts'
+    eventListViewOptions?: {
+      showDate: boolean;
+      showLocation: boolean;
+      showGuests: boolean;
+      showPayment: boolean;
+      showSalesperson: boolean;
     };
-    layout: {
-        borderRadius: number;
-        sidebarWidth: number;
-        cardDensity: 'compact' | 'comfortable' | 'spacious';
-        glassIntensity?: number; // New: Control blur strength
-    };
-    motion: {
-        enableAnimations: boolean;
-        transitionSpeed: number; // seconds
-        animationDuration: number; // seconds
-        transitionEasing: string;
-        defaultEntryAnimation: 'fadeIn' | 'slideUp' | 'zoomIn';
-        smoothScrolling: boolean;
-        cardHoverEffect: 'lift' | 'scale' | 'glow' | 'none';
-        buttonHoverEffect: 'lift' | 'scale' | 'glow' | 'none';
-        // Particle System Config
-        particleCount?: number;
-        particleSpeed?: number;
-        particleOpacity?: number;
-        particleStyle?: 'particle-flow' | 'light-flares' | 'abstract-lines' | 'golden-sparkles';
-        particleDirection?: 'up' | 'down' | 'left' | 'right' | 'random';
-        particleShape?: 'circle' | 'square' | 'star';
-        motionSensitivity?: number;
-        responsiveSensitivity?: number;
-        enableOverlap?: boolean;
-        overlayMode?: boolean;
-    };
-    branding: {
-        logoUrl?: string;
-        appBackgroundUrl?: string; // New global background
-    };
-    landingPage?: {
-        background: {
-             type: 'image' | 'video' | 'gradient';
-             imagePool?: string[];
-        };
-        motivationalQuotes: string[];
-    };
-    aiFallback?: {
-        enableGeminiQuotaFallback: boolean;
-        fallbackMode: 'predefined' | 'dynamic_placeholder';
-    };
-    userPreferences?: {
-      defaultView: 'Home' | 'Dashboard' | 'Events';
-      dashboardWidgets?: string[]; // 'kpi', 'charts', 'alerts'
-      eventListViewOptions?: {
-        showDate: boolean;
-        showLocation: boolean;
-        showGuests: boolean;
-        showPayment: boolean;
-        showSalesperson: boolean;
-      };
-    };
+  };
 }
 
 export interface AppState {

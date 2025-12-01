@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VITE_AI_PROXY_ENABLED: true
+    env:
+      VITE_AI_PROXY_ENABLED: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Cache Node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install Dependencies
+        run: npm install
+        env:
+          VITE_AI_PROXY_ENABLED: true
+      - name: Lint
+        run: npm run lint
+      - name: Run Test Suite
+        run: npm run test:ci
+
+  integration:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ secrets.AI_PROXY_URL != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Deployment Health Test
+        run: npm run test:ci -- tests/aiProxy.deployment.test.ts
+        env:
+          AI_PROXY_URL: ${{ secrets.AI_PROXY_URL }}

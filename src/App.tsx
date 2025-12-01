@@ -23,7 +23,7 @@ import { SuccessBanner } from '../components/common/SuccessBanner';
 import { QuotaErrorModal } from '../components/common/QuotaErrorModal';
 import { LandingPage } from '../components/LandingPage';
 import { HomePage } from '../components/HomePage';
-import { QuotaExceededError } from '../services/geminiService';
+import { QuotaExceededError, setAiProxyEnabled } from '../services/geminiService';
 
 interface ErrorBoundaryProps {
   children?: ReactNode;
@@ -141,6 +141,11 @@ export const App: React.FC = () => {
         document.body.classList.remove('theme-dark');
     }
   }, [settings]);
+
+    useEffect(() => {
+        // Set runtime proxy mode for the services wrapper whenever settings change
+        setAiProxyEnabled(settings?.aiProxyEnabled ?? undefined);
+    }, [settings]);
 
   const handleUpdate = (key: keyof typeof appState, data: any) => {
       setAppState((prev: any) => ({ ...prev, [key]: data }));
@@ -305,6 +310,7 @@ export const App: React.FC = () => {
                 onClose={() => setShowImageGenerator(false)} 
                 setError={setErrorWithSound} 
                 onLogAIInteraction={handleLogAIInteraction} 
+                onAIFallback={setIsAIFallbackActive}
             />
         )}
 

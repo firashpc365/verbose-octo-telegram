@@ -61,20 +61,23 @@ export const defaultDarkTheme: AppSettings = {
     ],
   },
   aiFallback: {
-      enableGeminiQuotaFallback: true,
-      fallbackMode: 'predefined'
+    enableGeminiQuotaFallback: true,
+    fallbackMode: 'predefined'
   },
-   userPreferences: {
-      defaultView: 'Dashboard',
-      dashboardWidgets: ['kpi', 'charts', 'alerts'],
-       eventListViewOptions: {
-        showDate: true,
-        showLocation: true,
-        showGuests: true,
-        showPayment: true,
-        showSalesperson: true,
-      },
+  aiProxyEnabled: false,
+  // Default proxy off by default for dev
+  aiProxyEnabled: false,
+  userPreferences: {
+    defaultView: 'Dashboard',
+    dashboardWidgets: ['kpi', 'charts', 'alerts'],
+    eventListViewOptions: {
+      showDate: true,
+      showLocation: true,
+      showGuests: true,
+      showPayment: true,
+      showSalesperson: true,
     },
+  },
 };
 
 export const defaultLightTheme: AppSettings = {
@@ -91,18 +94,18 @@ export const defaultLightTheme: AppSettings = {
 };
 
 export const SYSTEM_THEMES: ThemePreset[] = [
-    {
-        id: 'sys-default-dark',
-        name: 'Default Dark',
-        settings: defaultDarkTheme,
-        createdAt: new Date().toISOString()
-    },
-    {
-        id: 'sys-default-light',
-        name: 'Default Light',
-        settings: defaultLightTheme,
-        createdAt: new Date().toISOString()
-    }
+  {
+    id: 'sys-default-dark',
+    name: 'Default Dark',
+    settings: defaultDarkTheme,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sys-default-light',
+    name: 'Default Light',
+    settings: defaultLightTheme,
+    createdAt: new Date().toISOString()
+  }
 ];
 
 const PERMISSIONS: RolesConfig = {
@@ -113,25 +116,26 @@ const PERMISSIONS: RolesConfig = {
 
 const now = new Date().toISOString();
 const defaultServices: ServiceItem[] = [
-    // Services from migrations are consolidated here for the default state
-    {
-        id: 's-mig-10-1', name: 'Morning Breakfast Buffet (VIP)', category: 'Catering', description: 'Comprehensive breakfast spread including bread display, croissants, rustic bites, mini manakish, foul & balila, hot display (grilled vegetables, halloumi), pancakes, waffles, and beverages.', basePrice: 180, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Live Station', 'International Selection', 'Beverages Included'], menuOptions: ['Assortment of croissants', 'Rustic Bites', 'Mini manakish', 'Foul & balila', 'Grilled Halloumi', 'Pancakes', 'Cheese kunafa'], displayPrice: true
-    },
-    {
-        id: 's-mig-10-2', name: 'Coffee Break (AM - Option A)', category: 'Catering', description: 'Premium morning refreshment break. Includes bread display, croissants, rustic bites, english cake, cookies, pancakes, yogurt jars, fruit display, and full beverage station.', basePrice: 120, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Premium Selection', '3 Hour Duration'], menuOptions: ['Bread Display', 'Croissants', 'Rustic Bites', 'English Cake', 'Pancakes', 'Yogurt Jars', 'Fresh Juices'], displayPrice: true
-    },
-    {
-        id: 's-ven-001', name: 'Venue Rental', category: 'Venue', description: 'Exclusive rental of our main ballroom with seating for up to 300 guests.', basePrice: 5000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['300 Guests Capacity', 'Ballroom', 'Exclusive Use'], displayPrice: true
-    },
-    {
-        id: 's-av-003', name: 'Projector & Screen Package', category: 'AV & Lighting', description: 'High-lumen projector with a portable 100-inch screen. Ideal for breakout rooms.', basePrice: 800, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Full HD', 'HDMI/VGA', 'Portable'], displayPrice: true
-    },
-    { id: 's-ep-001', name: 'Large Naimi Lambs (18-20kg each) - Option A', category: 'Catering', description: 'Magnificent, perfectly roasted Naimi Lambs, serving as a captivating centerpiece that delivers exceptional tenderness, rich authentic flavors, and generous portions. Quantity: 2 units.', basePrice: 3000, pricingType: 'Per Unit', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Roasted Whole', 'Authentic Flavor', 'Centerpiece'], displayPrice: true },
-    { id: 's-ch-001', name: 'Lunch Buffet Option A', category: 'Catering', description: 'International Bread Selection, Cold Appetizers (Hummus, Vine Leaves, etc.), Salads (Tabbouleh, Rocca...), Hot Appetizers (Spinach Fatayer...), Main Courses (Baked Hamour, Butter Chicken...), Desserts (Cheesecake...), Beverages.', basePrice: 200, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['International Menu', 'Comprehensive Buffet'], menuOptions: ['Hummus Beiruty', 'Vine Leaves', 'Tabbouleh', 'Rocca Mushroom Salad', 'Spinach Fatayer', 'Baked Hamour Filet', 'Butter Chicken', 'Lamb Kabsa', 'Salted Caramel Cheesecake', 'Soft Drinks'], displayPrice: true
-    },
-    // Adding a few more for completeness
-    { id: 's-photo-1', name: 'Event Photography (8 hours)', category: 'Photography', description: 'Full-day event coverage by a professional photographer. Includes edited high-resolution photos.', basePrice: 3000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now },
-    { id: 's-av-main', name: 'Main Stage AV Package', category: 'AV & Lighting', description: 'Complete package with large LED screen, sound system for 300 guests, and stage lighting.', basePrice: 15000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now }
+  // Services from migrations are consolidated here for the default state
+  {
+    id: 's-mig-10-1', name: 'Morning Breakfast Buffet (VIP)', category: 'Catering', description: 'Comprehensive breakfast spread including bread display, croissants, rustic bites, mini manakish, foul & balila, hot display (grilled vegetables, halloumi), pancakes, waffles, and beverages.', basePrice: 180, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Live Station', 'International Selection', 'Beverages Included'], menuOptions: ['Assortment of croissants', 'Rustic Bites', 'Mini manakish', 'Foul & balila', 'Grilled Halloumi', 'Pancakes', 'Cheese kunafa'], displayPrice: true
+  },
+  {
+    id: 's-mig-10-2', name: 'Coffee Break (AM - Option A)', category: 'Catering', description: 'Premium morning refreshment break. Includes bread display, croissants, rustic bites, english cake, cookies, pancakes, yogurt jars, fruit display, and full beverage station.', basePrice: 120, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Premium Selection', '3 Hour Duration'], menuOptions: ['Bread Display', 'Croissants', 'Rustic Bites', 'English Cake', 'Pancakes', 'Yogurt Jars', 'Fresh Juices'], displayPrice: true
+  },
+  {
+    id: 's-ven-001', name: 'Venue Rental', category: 'Venue', description: 'Exclusive rental of our main ballroom with seating for up to 300 guests.', basePrice: 5000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['300 Guests Capacity', 'Ballroom', 'Exclusive Use'], displayPrice: true
+  },
+  {
+    id: 's-av-003', name: 'Projector & Screen Package', category: 'AV & Lighting', description: 'High-lumen projector with a portable 100-inch screen. Ideal for breakout rooms.', basePrice: 800, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Full HD', 'HDMI/VGA', 'Portable'], displayPrice: true
+  },
+  { id: 's-ep-001', name: 'Large Naimi Lambs (18-20kg each) - Option A', category: 'Catering', description: 'Magnificent, perfectly roasted Naimi Lambs, serving as a captivating centerpiece that delivers exceptional tenderness, rich authentic flavors, and generous portions. Quantity: 2 units.', basePrice: 3000, pricingType: 'Per Unit', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['Roasted Whole', 'Authentic Flavor', 'Centerpiece'], displayPrice: true },
+  {
+    id: 's-ch-001', name: 'Lunch Buffet Option A', category: 'Catering', description: 'International Bread Selection, Cold Appetizers (Hummus, Vine Leaves, etc.), Salads (Tabbouleh, Rocca...), Hot Appetizers (Spinach Fatayer...), Main Courses (Baked Hamour, Butter Chicken...), Desserts (Cheesecake...), Beverages.', basePrice: 200, pricingType: 'Per Person', status: 'Active', createdAt: now, lastModifiedAt: now, keyFeatures: ['International Menu', 'Comprehensive Buffet'], menuOptions: ['Hummus Beiruty', 'Vine Leaves', 'Tabbouleh', 'Rocca Mushroom Salad', 'Spinach Fatayer', 'Baked Hamour Filet', 'Butter Chicken', 'Lamb Kabsa', 'Salted Caramel Cheesecake', 'Soft Drinks'], displayPrice: true
+  },
+  // Adding a few more for completeness
+  { id: 's-photo-1', name: 'Event Photography (8 hours)', category: 'Photography', description: 'Full-day event coverage by a professional photographer. Includes edited high-resolution photos.', basePrice: 3000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now },
+  { id: 's-av-main', name: 'Main Stage AV Package', category: 'AV & Lighting', description: 'Complete package with large LED screen, sound system for 300 guests, and stage lighting.', basePrice: 15000, pricingType: 'Flat Fee', status: 'Active', createdAt: now, lastModifiedAt: now }
 ];
 
 export const DEFAULT_APP_STATE: AppState = {

@@ -25,6 +25,62 @@ This is a React Single Page Application (SPA) built with Vite and TypeScript. It
     npm run dev
     ```
 
+4. To enable server-side AI proxy (optional):
+     - Create `.env` and add:
+         ```env
+         VITE_AI_PROXY_ENABLED=true
+         ```
+    ## CI & Offline development notes
+
+    - This repository includes a local fallback for the `@google/genai` package under `vendor/mock-genai`.
+    - The local mock is used by default via `package.json` dependency and provides a reproducible environment for CI and offline development. You can replace it with the real `@google/genai` package if required.
+     - The local mock is used by default via `package.json` dependency and provides a reproducible environment for CI and offline development. You can replace it with the real `@google/genai` package by running `npm run use-real-genai`.
+
+     - Start the dev server and ensure a serverless endpoint is available at `/api/ai/generate` to proxy calls (see `docs/AI_BACKEND_DESIGN.md`).
+
+    ### Local AI dev proxy
+
+    - Start a local AI proxy that mimics the serverless endpoint:
+
+    ```bash
+    npm run dev:ai-proxy
+    ```
+
+    - This runs a small Express server at `http://localhost:3456` with endpoints:
+        - `GET /api/health` — checks health
+        - `POST /api/ai/generate` — generative endpoint (supports `action: 'generateImages'`)
+
+    Example local test flow (browser + proxy):
+
+    1. Start the dev AI proxy in a terminal:
+    ```bash
+    AI_PROXY_URL=http://localhost:3456 npm run dev:ai-proxy
+    ```
+    2. In a separate terminal, start the app with proxy enabled (env):
+    ```bash
+    VITE_AI_PROXY_ENABLED=true AI_PROXY_URL=http://localhost:3456 npm run dev
+    ```
+    3. Open the app and go to `Application Settings -> Developer -> Use AI Proxy` and toggle on (if needed). Then trigger an AI action in the UI (Image Generator, Service Editor AI suggestions, etc).
+    4. Monitor the dev proxy terminal to see logged requests (e.g., `[dev-proxy] POST /api/ai/generate`).
+
+    ### Using real vs mock GenAI package
+
+    - Default (offline/CI): local mock under `vendor/mock-genai` is used by default through `package.json`.
+    - Switch to real package for production testing:
+        - `npm run use-real-genai` (installs `@google/genai`) and remove mock after testing.
+    - Switch back to mock:
+        - `npm run use-mock-genai` (installs `file:vendor/mock-genai`).
+
+
+## Testing
+
+Run the unit tests:
+```bash
+npm run test
+```
+
+Tests are written using Vitest and are located in the `tests/` directory. AI calls are mocked for deterministic behavior.
+
 ---
 
 ## Deployment Options
