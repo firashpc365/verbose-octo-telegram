@@ -12,8 +12,6 @@
     "dev:ai-proxy": "node serverless/devProxy.cjs",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:ai-proxy\"",
     "smoke-proxy": "node scripts/smoke-proxy.js",
-    "use-real-genai": "npm install @google/genai --save",
-    "use-mock-genai": "npm install file:vendor/mock-genai --save",
     "test:watch": "vitest --watch",
     "preview": "vite preview"
   },
