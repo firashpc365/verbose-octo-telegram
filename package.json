@@ -17,8 +17,7 @@
     "test:watch": "vitest --watch",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@google/genai": "file:vendor/mock-genai",
+  "dependencies": {"@google/generative-ai": "^0.12.0",
     "@studio-freight/lenis": "^1.0.42",
     "date-fns": "^3.6.0",
     "html2canvas": "^1.4.1",
