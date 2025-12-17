@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest",
+    "test:ci": "vitest --run --reporter dot",
+    "dev:ai-proxy": "node serverless/devProxy.cjs",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:ai-proxy\"",
+    "smoke-proxy": "node scripts/smoke-proxy.js",
+    "use-real-genai": "npm install @google/genai --save",
+    "use-mock-genai": "npm install file:vendor/mock-genai --save",
+    "test:watch": "vitest --watch",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@google/genai": "^1.29.0",
-    "node-fetch": "3.3.2",
+  "dependencies": {"@google/generative-ai": "^0.12.0",
     "@studio-freight/lenis": "^1.0.42",
     "date-fns": "^3.6.0",
     "html2canvas": "^1.4.1",
@@ -28,13 +34,14 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
-  },
-  "overrides": {
-    "node-fetch": "3.3.2"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.3.0"
+   "vitest": "^1.6.0",,
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0",
+    "jsdom": "^22.0.0",
+    "node-fetch": "^2.6.7",
+    "vite": "^5.2.0",
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.0"
   }
 }
